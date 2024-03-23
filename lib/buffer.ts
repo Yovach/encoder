@@ -3,25 +3,25 @@ export class BufferData {
   view = new DataView(this.buffer);
 
   lastInsertedData: number | null;
-  position: number = 0;
+  cursor: number = 0;
 
   usedBuffer() {
-    return this.buffer.slice(0, this.position);
+    return this.buffer.slice(0, this.cursor);
   }
 
   bool(value: boolean) {
-    this.view.setUint8(this.position++, value ? 1 : 0);
+    this.view.setUint8(this.cursor++, value ? 1 : 0);
   }
 
   str(value: string) {
     for (let i = 0; i < value.length; i++) {
-      this.view.setUint8(this.position++, value.charCodeAt(0));
+      this.view.setUint8(this.cursor++, value.charCodeAt(0));
     }
-    this.view.setUint8(this.position++, 0);
+    this.view.setUint8(this.cursor++, 0);
   }
 
   uint8(value: number) {
-    this.view.setUint8(this.position++, value);
+    this.view.setUint8(this.cursor++, value);
   }
 
   fromJSON(data: Record<string, number | boolean | string | object> | object) {
@@ -39,4 +39,5 @@ export class BufferData {
     }
     return this;
   }
+  
 }
