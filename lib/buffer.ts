@@ -1,9 +1,18 @@
 export class BufferData {
-  buffer = new ArrayBuffer(2048);
-  view = new DataView(this.buffer);
+  buffer: ArrayBuffer;
+  view: DataView; 
 
   lastInsertedData: number | null;
   cursor: number = 0;
+
+  constructor(fromBuffer?: ArrayBuffer) {
+    this.buffer = fromBuffer ?? new ArrayBuffer(2048);
+    this.view = new DataView(this.buffer);
+  }
+
+  readType() {
+
+  }
 
   usedBuffer() {
     return this.buffer.slice(0, this.cursor);
