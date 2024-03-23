@@ -2,12 +2,12 @@ import { BufferData } from "./buffer.ts";
 
 export class BufferDataRegistry {
   registry: object[] = [];
-  lastId = 0;
+  nextId = 0;
 
   register(item: object) {
     this.registry.push({
       ...item,
-      id: this.lastId++,
+      id: this.nextId++,
     });
   }
 
